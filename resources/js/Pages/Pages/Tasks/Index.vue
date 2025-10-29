@@ -1,10 +1,15 @@
 <script setup>
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-    import { Head } from '@inertiajs/vue3';
+    import { Head, usePage } from '@inertiajs/vue3';
+    import { computed } from 'vue';
+    import Table from '@/Components/Task/Table/Table.vue';
+    import ButtonLink from '@/Components/ButtonLink.vue';
+
+    const page = usePage();
+    const tasks = computed(() => page.props.tasks ?? []);
 </script>
 
 <template>
-
     <Head title="Tasks List" />
 
     <AuthenticatedLayout>
@@ -16,9 +21,14 @@
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
-                        Tasks Index Page
+                <div class="overflow-hidden shadow-sm sm:rounded-lg">
+
+                    <div class="flex justify-end mb-4">
+                        <ButtonLink :location="route('tasks.create')" label="Create new tasks" />
+                    </div>
+
+                    <div>
+                        <Table :tasks="tasks" />
                     </div>
                 </div>
             </div>

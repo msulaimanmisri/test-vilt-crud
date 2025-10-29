@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Inertia\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -13,7 +14,11 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Pages/Tasks/Index');
+        $tasks = Auth::user()->tasks()
+            ->with('subTasks')
+            ->get();
+
+        return Inertia::render('Pages/Tasks/Index', compact('tasks'));
     }
 
     /**
@@ -21,7 +26,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Pages/Tasks/Create');
     }
 
     /**
