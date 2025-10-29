@@ -5,12 +5,12 @@
 
 <template>
 
-    <Head title="Dashboard" />
+    <Head title="Tasks List" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Dashboard
+                Tasks List
             </h2>
         </template>
 
@@ -18,7 +18,7 @@
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        You're logged in!
+                        Tasks Index Page
                     </div>
                 </div>
             </div>
