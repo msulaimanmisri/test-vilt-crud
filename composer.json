@@ -73,6 +73,11 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "git": [
+            "git add .",
+            "git commit -m 'wip' || echo 'Nothing to commit'",
+            "git push"
         ]
     },
     "extra": {
