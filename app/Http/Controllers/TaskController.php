@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Task\StoreTaskRequest;
 use Inertia\Inertia;
 use Inertia\Controller;
 use Illuminate\Http\Request;
@@ -26,15 +27,21 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Pages/Tasks/Create');
+        $tasks = Auth::user()->tasks()->get();
+        return Inertia::render('Pages/Tasks/Create', compact('tasks'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-        dd($request->all());
+        Auth::user()->tasks()->create(
+            $request->validated()
+        );
+
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task created successfully.');
     }
 
     /**

@@ -3,6 +3,14 @@
     import InputField from '@/Components/Form/InputField.vue'
     import TextAreaField from '@/Components/Form/TextAreaField.vue';
     import SelectField from '@/Components/Form/SelectField.vue';
+
+    // Props
+    defineProps({
+        tasks: {
+            type: Array,
+            default: () => [],
+        },
+    });
 </script>
 
 <template>
@@ -15,10 +23,10 @@
 
                 <div class="w-full">
                     <SelectField label="Main task" id="parent_id" name="parent_id">
-                        <option value=""></option>
-                        <option value="task 1">Task 1</option>
-                        <option value="task 2">Task 2</option>
-                        <option value="task 3">Task 3</option>
+                        <option value="">---</option>
+                        <option v-for="(task, index) in tasks" :key="task.id" :task="task" :index="index">
+                            {{ task.title }}
+                        </option>
                     </SelectField>
                 </div>
             </div>
@@ -34,10 +42,10 @@
 
                 <div class="w-full">
                     <SelectField label="Priority" id="priority" name="priority">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                        <option value="urgent">Urgent</option>
+                        <option value="4">Low</option>
+                        <option value="3">Medium</option>
+                        <option value="2">High</option>
+                        <option value="1">Urgent</option>
                     </SelectField>
                 </div>
 

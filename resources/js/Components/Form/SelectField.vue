@@ -18,6 +18,11 @@
         compulsory: {
             type: Boolean,
             default: false
+        },
+
+        error: {
+            type: String,
+            default: null
         }
     });
 </script>
@@ -31,8 +36,10 @@
         </label>
 
         <select :id="id" :name="name"
-            class="bg-gray-50 border border-gray-300 text-gray-500 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
+            :class="['bg-gray-50 text-gray-500 rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3 border', error ? 'border-red-500' : 'border-gray-300']">
             <slot />
         </select>
+
+        <p v-if="error" class="mt-1 text-xs text-red-600">** {{ error }}</p>
     </div>
 </template>

@@ -1,11 +1,14 @@
 <script setup>
+    import { computed } from 'vue';
+    import { Head, usePage } from '@inertiajs/vue3';
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-    import { Head } from '@inertiajs/vue3';
     import CreateTaskForm from '@/Components/Task/Form/CreateTaskForm.vue';
+
+    const page = usePage();
+    const tasks = computed(() => page.props.tasks ?? []);
 </script>
 
 <template>
-
     <Head title="Create Task" />
 
     <AuthenticatedLayout>
@@ -19,7 +22,7 @@
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <CreateTaskForm />
+                        <CreateTaskForm :tasks="tasks" />
                     </div>
                 </div>
             </div>
