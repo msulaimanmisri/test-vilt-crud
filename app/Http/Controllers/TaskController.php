@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Task\StoreTaskRequest;
+use App\Http\Requests\Task\UpdateTaskRequest;
 
 class TaskController extends Controller
 {
@@ -70,9 +71,17 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateTaskRequest $request, Tasks $task)
     {
-        //
+        // Check if the authenticated user owns this task
+        if ($task->author_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $task->update($request->validated());
+
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task updated successfully.');
     }
 
     /**
