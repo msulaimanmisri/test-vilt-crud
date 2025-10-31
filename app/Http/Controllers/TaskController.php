@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tasks;
 use Inertia\Inertia;
 use Inertia\Controller;
 use Illuminate\Support\Str;
@@ -59,9 +60,11 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Tasks $task)
     {
-        //
+        $tasks = Auth::user()->tasks()->where('id', '!=', $task->id)->get();
+        
+        return Inertia::render('Pages/Tasks/Edit', compact('task', 'tasks'));
     }
 
     /**

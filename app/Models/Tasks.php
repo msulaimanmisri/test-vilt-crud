@@ -22,6 +22,18 @@ class Tasks extends Model
         'due_date',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'due_date' => 'datetime:Y-m-d',
+        ];
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
+
     public function mainTask(): BelongsTo
     {
         return $this->belongsTo(Tasks::class, 'parent_id');
