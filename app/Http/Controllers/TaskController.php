@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Task\StoreTaskRequest;
 use Inertia\Inertia;
 use Inertia\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Task\StoreTaskRequest;
 
 class TaskController extends Controller
 {
@@ -36,9 +37,12 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        Auth::user()->tasks()->create(
-            $request->validated()
-        );
+        $user = Auth::user();
+
+        $user->tasks()->create([
+            'uuid' => Str::uuid(),
+            ...$request->validated(),
+        ]);
 
         return redirect()->route('tasks.index')
             ->with('success', 'Task created successfully.');

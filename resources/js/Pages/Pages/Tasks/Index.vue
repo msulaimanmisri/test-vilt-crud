@@ -4,12 +4,14 @@
     import { computed } from 'vue';
     import Table from '@/Components/Task/Table/Table.vue';
     import ButtonLink from '@/Components/ButtonLink.vue';
+    import SuccessAlert from '@/Components/Alert/Success.vue';
 
     const page = usePage();
     const tasks = computed(() => page.props.tasks ?? []);
 </script>
 
 <template>
+
     <Head title="Tasks List" />
 
     <AuthenticatedLayout>
@@ -21,8 +23,9 @@
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="overflow-hidden shadow-sm sm:rounded-lg">
+                <SuccessAlert v-if="page.props.flash?.success" :message="page.props.flash.success" />
 
+                <div class="overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="flex justify-end mb-4">
                         <ButtonLink :location="route('tasks.create')" label="Create new tasks" />
                     </div>

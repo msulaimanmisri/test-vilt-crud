@@ -25,7 +25,7 @@ class StoreTaskRequest extends FormRequest
             'parent_id' => ['nullable', 'exists:tasks,id'],
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'priority' => ['required', 'in:low,medium,high,urgent'],
+            'priority' => ['required', 'integer', 'in:1,2,3,4'],
             'status' => ['required', 'integer', 'in:1,2,3,4'],
             'due_date' => ['nullable', 'date'],
         ];

@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('priority')->default('low');
+            $table->tinyInteger('priority')->default(4);
             $table->tinyInteger('status')->default(1);
 
             $table->dateTime('due_date')->nullable();
